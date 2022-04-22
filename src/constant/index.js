@@ -5,6 +5,7 @@ import stats from '@/assets/img/menus/stats.svg';
 import reward from '@/assets/img/menus/reward.svg';
 import asset from '@/assets/img/asset.svg';
 import eth from '@/assets/img/eth.svg';
+import avatar from '@/assets/img/avatar.svg';
 
 export default {
     logo,
@@ -14,7 +15,7 @@ export default {
     reward,
     asset,
     eth,
-
+    avatar,
 
 }
   

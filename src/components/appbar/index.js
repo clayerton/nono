@@ -58,7 +58,7 @@ const SideBar = props => {
         <div className={classes.mainPanel}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar classes={classes.toolBar}>
+                <Toolbar classes={{ root: classes.toolBar }}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -69,36 +69,38 @@ const SideBar = props => {
                         <MenuIcon htmlColor={theme.custom.palette.noteBackground.default} />
                     </IconButton>
                     {isMobile ? (
-                        isSearchShowingInMobile ? (
-                            <SearchContainer onSearchClose={() => setSearchShowing(false)} />
-                        ) : (
-                            <div>logo</div>
-                        )
+                        isSearchShowingInMobile &&
+                        <SearchContainer onSearchClose={() => setSearchShowing(false)} />
                     ) : (
                         <SearchContainer onSearchClose={() => setSearchShowing(false)} />
                     )}
-                    {isMobile && !isSearchShowingInMobile ? (
-                        <div>
-                            <IconButton
-                                aria-label="search"
-                                aria-controls={menuId}
-                                onClick={() => setSearchShowing(true)}
-                            >
-                                <SearchIcon htmlColor={theme.custom.palette.noteBackground.default} />
-                            </IconButton>
+                    <Hidden xsDown implementation="css">
+                        <div className={classes.rightBox}>
+                            <Button disableRipple={true} startIcon={<img src={Images.asset} />} classes={{ root: classes.buttonAsset }}>0xc9b1a...e51822</Button>
+                            <Button disableRipple={true} startIcon={<img src={Images.eth} />}>Ethereum</Button>
                         </div>
-                    ) : null}
-                    <div>
-                        <Button disableRipple={true} startIcon={<img src={Images.asset} />} classes={{ root: classes.buttonAsset }}>0xc9b1a...e51822</Button>
-                        <Button disableRipple={true} startIcon={<img src={Images.eth} />}>Ethereum</Button>
+                    </Hidden>
+                    <Hidden smUp implementation="css">
+                        {isMobile && !isSearchShowingInMobile ? (
+                            <div className={classes.rightBoxMobile}>
+                                <IconButton
+                                    aria-label="search"
+                                    aria-controls={menuId}
+                                    onClick={() => setSearchShowing(true)}
+                                >
+                                    <SearchIcon htmlColor={theme.custom.palette.noteBackground.default} />
+                                </IconButton>
+                                <div className={classes.rightIcon}><img src={Images.asset} /></div>
+                                <div className={cx(classes.rightIcon, classes.rightIcon1)}><img src={Images.eth} /></div>
+                            </div>
+                        ) : null}
 
-                    </div>
+                    </Hidden>
                 </Toolbar>
             </AppBar>
             <nav aria-label='mailbox folders'>
                 <Hidden smUp implementation="css">
                     <Drawer
-                        // container={container}
                         variant="temporary"
                         anchor={'left'}
                         open={mobileOpen}
@@ -107,7 +109,7 @@ const SideBar = props => {
                             paper: classes.drawerPaper,
                         }}
                         ModalProps={{
-                            keepMounted: true, // Better open performance on mobile.
+                            keepMounted: true,
                         }}
                     >
                         {drawer}
@@ -148,6 +150,7 @@ const useStyles = makeStyles((theme) => ({
         fontStyle: 'normal',
         fontWeight: '400',
         fontSize: '14px',
+
         [theme.breakpoints.up('sm')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
@@ -155,6 +158,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     toolBar: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
 
     },
     menuButton: {
@@ -222,6 +228,9 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: '26px'
         }
     },
+    rightBox: {
+        display: 'flex',
+    },
     buttonAsset: {
         background: '#000',
         color: '#fff',
@@ -229,7 +238,30 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             background: '#000',
         }
+    },
+    rightBoxMobile: {
+        display: 'flex',
+        alignItems: 'center',
+
+        '& .rightIcon:first-child': {
+            background: '#000',
+            marginRight: '17px'
+        }
+    },
+    rightIcon: {
+        width: '26px',
+        height: '26px',
+        borderRadius: '50%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        border: '0.5px solid #000000',
+        cursor: 'pointer',
+        background: '#000',
+        marginRight: '17px'
+    },
+    rightIcon1: {
+        background: '#fff',
+        marginRight: '0'
     }
-
-
 }))
