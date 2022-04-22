@@ -9,7 +9,7 @@ import { useLocation } from "react-router";
 import Route from "@/router";
 import clsx from "clsx";
 import Navbar from "@/components/navbar";
-
+import SideBar from '@/components/Sidebar/sidebar'
 const useStyle = makeStyles((theme) => {
   console.log(theme,'theme')
   return ({
@@ -19,7 +19,7 @@ const useStyle = makeStyles((theme) => {
     },
   content: {
     flexGrow: 1,
-    marginTop: 73,
+    // marginTop: 73,
     paddingBottom:50,
     padding: '24px',
     margin: theme.spacing(2)
@@ -40,11 +40,12 @@ function App() {
   return (
     <React.Suspense fallback={null}>
       <div className={clsx(classes.backdrop, classes.a)}>
-        <Navbar />
-        <div className={classes.content}>
+        {/* <Navbar /> */}
+        <SideBar />
+        {/* <div className={classes.content}>
         <Route />
 
-        </div>
+        </div> */}
         {/* <div>2212</div> */}
        
       </div>
