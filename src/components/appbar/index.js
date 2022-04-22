@@ -1,58 +1,64 @@
 import React, { useState } from 'react';
 import cx from 'clsx';
 import { useNavigate, useLocation } from "react-router-dom";
-import { CssBaseline, makeStyles, Drawer, Hidden, AppBar, List, ListItemText, Toolbar, Divider, IconButton, Typography } from '@material-ui/core';
+import { CssBaseline, makeStyles, useTheme, Drawer, Hidden, AppBar, List, ListItemText, Toolbar, useMediaQuery, Button, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/SearchOutlined';
+
 import ListItem from '@material-ui/core/ListItem';
 import Images from '@/constant'
-import Route from "@/router";
+import SearchBar from './searchBar';
+
 const routers = [
-    { url: '/', exact: true,  name: 'Home', logo: Images.home },
+    { url: '/', exact: true, name: 'Home', logo: Images.home },
     { url: '/explore', name: 'Explore', logo: Images.explore },
     { url: '/stats', name: 'Stats', logo: Images.stats },
     { url: '/rewards', name: 'Rewards', logo: Images.reward },
 
 ]
 const SideBar = props => {
+    const menuId = "primary-search-account-menu";
+
     const { window, location } = props;
     const { pathname, state } = useLocation();
+    const theme = useTheme();
 
-    const classes = useStyle();
+    const classes = useStyles();
     const navigate = useNavigate();
 
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [isSearchShowingInMobile, setSearchShowing] = useState(false);
+    const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
     }
     const goTo = (path) => {
         navigate(path);
-      };
-    console.log(pathname,'pathname')
+    };
+    console.log(pathname, 'pathname')
     const drawer = (
         <div>
-            <div onClick={()=>goTo('/')} className={classes.logo}>
+            <div onClick={() => goTo('/')} className={classes.logo}>
                 <img src={Images.logo} />
                 <span>Nonfungibles</span>
             </div>
             <List>
                 {routers.map((routeObj, index) => (
-                    <ListItem onClick={()=>goTo(routeObj.url)} className={cx(classes.menuList, (routeObj.exact && (pathname === '/') || (!routeObj.exact && pathname.includes(routeObj.url))) && classes.menuListActive)}  key={index}>
+                    <ListItem onClick={() => goTo(routeObj.url)} className={cx(classes.menuList, (routeObj.exact && (pathname === '/') || (!routeObj.exact && pathname.includes(routeObj.url))) && classes.menuListActive)} key={index}>
                         <img src={routeObj.logo} />
-                       <ListItemText primary={routeObj.name} />
+                        <ListItemText primary={routeObj.name} />
                     </ListItem>
                 ))}
             </List>
 
         </div>
     );
-    const container = window !== undefined ? () => window().document.body : undefined;
-
     return (
         <div className={classes.mainPanel}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar classes={classes.toolBar}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -60,18 +66,39 @@ const SideBar = props => {
                         onClick={handleDrawerToggle}
                         className={classes.menuButton}
                     >
-                        <MenuIcon />
+                        <MenuIcon htmlColor={theme.custom.palette.noteBackground.default} />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
-                        3131
-                    </Typography>
+                    {isMobile ? (
+                        isSearchShowingInMobile ? (
+                            <SearchContainer onSearchClose={() => setSearchShowing(false)} />
+                        ) : (
+                            <div>logo</div>
+                        )
+                    ) : (
+                        <SearchContainer onSearchClose={() => setSearchShowing(false)} />
+                    )}
+                    {isMobile && !isSearchShowingInMobile ? (
+                        <div>
+                            <IconButton
+                                aria-label="search"
+                                aria-controls={menuId}
+                                onClick={() => setSearchShowing(true)}
+                            >
+                                <SearchIcon htmlColor={theme.custom.palette.noteBackground.default} />
+                            </IconButton>
+                        </div>
+                    ) : null}
+                    <div>
+                        <Button disableRipple={true} startIcon={<img src={Images.asset} />} classes={{ root: classes.buttonAsset }}>0xc9b1a...e51822</Button>
+                        <Button disableRipple={true} startIcon={<img src={Images.eth} />}>Ethereum</Button>
+
+                    </div>
                 </Toolbar>
             </AppBar>
-
             <nav aria-label='mailbox folders'>
                 <Hidden smUp implementation="css">
                     <Drawer
-                        container={container}
+                        // container={container}
                         variant="temporary"
                         anchor={'left'}
                         open={mobileOpen}
@@ -94,34 +121,41 @@ const SideBar = props => {
                     </Drawer>
                 </Hidden>
             </nav>
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Route />
-            </main>
         </div>
     )
 }
 export default SideBar;
+function SearchContainer({ onSearchClose }) {
+    const classes = useStyles();
+    return (
+        <div className={classes.searchbarContainer}>
+            <SearchBar onSearchClose={onSearchClose} />
+        </div>
+    );
+}
 const drawerWidth = 200;
 
-const useStyle = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     mainPanel: {
         display: 'flex',
 
     },
-    drawer: {
-
-        [theme.breakpoints.up('sm')]: {
-            // backgroundColor: 'red'
-        },
-    },
     appBar: {
         zIndex: 9999,
+        background: '#fff',
+        color: '#000',
+        fontFamily: 'Archivo Black',
+        fontStyle: 'normal',
+        fontWeight: '400',
+        fontSize: '14px',
         [theme.breakpoints.up('sm')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
             zIndex: 88,
         },
+    },
+    toolBar: {
+
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -129,23 +163,14 @@ const useStyle = makeStyles((theme) => ({
             display: 'none',
         },
     },
-    toolbar: theme.mixins.toolbar,
-
     drawerPaper: {
         width: drawerWidth,
         backgroundColor: '#000000',
         color: '#fff',
-        fontFamily: 'Archivo Black',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
-    },
-    content: {
-        flexGrow: 1,
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: drawerWidth,
-        },
     },
     logo: {
         margin: '50px 0 100px 0',
@@ -161,12 +186,11 @@ const useStyle = makeStyles((theme) => ({
             fontWeight: 900,
             fontSize: '18px',
         },
-        display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
     },
-   
+
     menuList: {
         height: '40px',
         width: '150px',
@@ -179,19 +203,33 @@ const useStyle = makeStyles((theme) => ({
             marginRight: '10px',
         },
         '& span': {
-            fontFamily: 'ArchivoBlack',
+            fontFamily: 'Archivo Black',
             fontStyle: 'normal',
             fontWeight: 400,
             fontSize: '14px',
         }
-        
+
     },
     menuListActive: {
         background: '#fff',
         color: '#000',
-   
-
+    },
+    searchbarContainer: {
+        flexGrow: 1,
+        [theme.breakpoints.up("md")]: {
+            flexGrow: 0,
+            width: '500px',
+            marginLeft: '26px'
+        }
+    },
+    buttonAsset: {
+        background: '#000',
+        color: '#fff',
+        marginRight: '30px',
+        '&:hover': {
+            background: '#000',
+        }
     }
-   
+
 
 }))

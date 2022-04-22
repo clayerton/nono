@@ -9,22 +9,26 @@ import { useLocation } from "react-router";
 import Route from "@/router";
 import clsx from "clsx";
 import Navbar from "@/components/navbar";
-import SideBar from '@/components/Sidebar/sidebar'
+import Appbar from '@/components/appbar'
+const drawerWidth = 200;
+
 const useStyle = makeStyles((theme) => {
-  console.log(theme,'theme')
+  console.log(theme, 'theme')
   return ({
- 
+
     backdrop: {
       display: 'flex'
     },
-  content: {
-    flexGrow: 1,
-    // marginTop: 73,
-    paddingBottom:50,
-    padding: '24px',
-    margin: theme.spacing(2)
-  }
-})});
+    content: {
+      flexGrow: 1,
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: drawerWidth,
+      },
+    },
+    toolbar: theme.mixins.toolbar,
+
+  })
+});
 function App() {
   const { pathname } = useLocation();
   const classes = useStyle();
@@ -40,14 +44,11 @@ function App() {
   return (
     <React.Suspense fallback={null}>
       <div className={clsx(classes.backdrop, classes.a)}>
-        {/* <Navbar /> */}
-        <SideBar />
-        {/* <div className={classes.content}>
-        <Route />
-
-        </div> */}
-        {/* <div>2212</div> */}
-       
+        <Appbar />
+        <div className={classes.content}>
+          <div className={classes.toolbar} />
+          <Route />
+        </div>
       </div>
     </React.Suspense>
   );
