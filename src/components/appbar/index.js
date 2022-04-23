@@ -8,7 +8,7 @@ import SearchIcon from '@material-ui/icons/SearchOutlined';
 import ListItem from '@material-ui/core/ListItem';
 import Images from '@/constant'
 import SearchBar from './searchBar';
-
+import SwitchWallet from '../switchWallet';
 const routers = [
     { url: '/', exact: true, name: 'Home', logo: Images.home },
     { url: '/explore', name: 'Explore', logo: Images.explore },
@@ -28,6 +28,9 @@ const SideBar = props => {
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isSearchShowingInMobile, setSearchShowing] = useState(false);
+    const [connect, setConnect] = useState(false);
+    const [open, setOpen] = useState(false);
+
     const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
 
     const handleDrawerToggle = () => {
@@ -36,6 +39,9 @@ const SideBar = props => {
     const goTo = (path) => {
         navigate(path);
     };
+    const handleIsConnect = () => {
+        setOpen(true)
+    }
     console.log(pathname, 'pathname')
     const drawer = (
         <div>
@@ -76,7 +82,7 @@ const SideBar = props => {
                     )}
                     <Hidden xsDown implementation="css">
                         <div className={classes.rightBox}>
-                            <Button disableRipple={true} startIcon={<img src={Images.asset} />} classes={{ root: classes.buttonAsset }}>0xc9b1a...e51822</Button>
+                            <Button onClick={handleIsConnect} textAllCaps={false} disableRipple={true} startIcon={connect && <img src={Images.asset} />} classes={{ root: classes.buttonAsset }}>Connect</Button>
                             <Button disableRipple={true} startIcon={<img src={Images.eth} />}>Ethereum</Button>
                         </div>
                     </Hidden>
@@ -123,6 +129,7 @@ const SideBar = props => {
                     </Drawer>
                 </Hidden>
             </nav>
+            <SwitchWallet open={open} setOpen={setOpen} />
         </div>
     )
 }
@@ -235,6 +242,7 @@ const useStyles = makeStyles((theme) => ({
         background: '#000',
         color: '#fff',
         marginRight: '30px',
+
         '&:hover': {
             background: '#000',
         }

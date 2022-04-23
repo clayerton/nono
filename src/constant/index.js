@@ -6,6 +6,8 @@ import reward from '@/assets/img/menus/reward.svg';
 import asset from '@/assets/img/asset.svg';
 import eth from '@/assets/img/eth.svg';
 import avatar from '@/assets/img/avatar.svg';
+import metamask from '@/assets/img/metaMask.svg';
+import walletConnect from '@/assets/img/walletConnect.svg';
 
 export default {
     logo,
@@ -16,6 +18,7 @@ export default {
     asset,
     eth,
     avatar,
-
+    metamask,
+    walletConnect,
 }
   

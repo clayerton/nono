@@ -26,6 +26,7 @@ const theme = createTheme({
       }
     },
     MuiButton: {
+
       root: {
         background: '#fff',
         border: '0.5px solid #000000',
@@ -33,7 +34,8 @@ const theme = createTheme({
         borderRadius: '10px',
         href: 'none',
         variant: 'text',
-       
+        textTransform: 'none',
+
       },
       text: {
         color: '#000',
