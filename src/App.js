@@ -8,7 +8,6 @@ import { makeStyles } from "@material-ui/styles";
 import { useLocation } from "react-router";
 import Route from "@/router";
 import clsx from "clsx";
-import Navbar from "@/components/navbar";
 import Appbar from '@/components/appbar'
 const drawerWidth = 200;
 
@@ -17,7 +16,8 @@ const useStyle = makeStyles((theme) => {
   return ({
 
     backdrop: {
-      display: 'flex'
+      display: 'flex',
+      minHeight: '100vh',
     },
     content: {
       flexGrow: 1,
@@ -26,6 +26,16 @@ const useStyle = makeStyles((theme) => {
       },
     },
     toolbar: theme.mixins.toolbar,
+    main: {
+      padding: '50px',
+      background: '#e5e5e5',
+      [theme.breakpoints.between('sm', 'md')]: {
+        padding: '20px',
+      },
+      [theme.breakpoints.down('sm')]: {
+        padding: '15px 10px',
+      },
+    }
 
   })
 });
@@ -47,7 +57,9 @@ function App() {
         <Appbar />
         <div className={classes.content}>
           <div className={classes.toolbar} />
-          <Route />
+          <div className={classes.main}>
+            <Route />
+          </div>
         </div>
       </div>
     </React.Suspense>

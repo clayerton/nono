@@ -26,7 +26,6 @@ const theme = createTheme({
       }
     },
     MuiButton: {
-
       root: {
         background: '#fff',
         border: '0.5px solid #000000',
@@ -35,12 +34,12 @@ const theme = createTheme({
         href: 'none',
         variant: 'text',
         textTransform: 'none',
-
       },
       text: {
         color: '#000',
+        minWidth: '160px',
         height: '40px',
-        padding: '0 24px',
+        padding: '0 23px',
         fontFamily: 'Archivo Black',
       },
     },
@@ -75,7 +74,12 @@ const theme = createTheme({
         highlight: "#F1F3F4"
       },
       noteColorCheck: "#0007",
-      labelBackground: "#0002"
+      labelBackground: "#0002",
+
+      // 公共样式
+      defaultspacing: '50px',
+      mdspacing: '20px',
+      smspacing: '10px',
     }
   }
   

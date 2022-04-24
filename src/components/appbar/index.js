@@ -147,7 +147,6 @@ const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
     mainPanel: {
         display: 'flex',
-
     },
     appBar: {
         zIndex: 9999,
@@ -157,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
         fontStyle: 'normal',
         fontWeight: '400',
         fontSize: '14px',
-
+        // boxShadow: 'none',
         [theme.breakpoints.up('sm')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
@@ -242,7 +241,6 @@ const useStyles = makeStyles((theme) => ({
         background: '#000',
         color: '#fff',
         marginRight: '30px',
-
         '&:hover': {
             background: '#000',
         }

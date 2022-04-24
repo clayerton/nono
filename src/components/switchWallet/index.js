@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Images from "@/constant";
-import WalletConnectProvider from '@walletconnect/web3-provider'
+// import WalletConnectProvider from '@walletconnect/web3-provider'
 
 const SwitchWallet = (props) => {
   const { open, setOpen } = props;
