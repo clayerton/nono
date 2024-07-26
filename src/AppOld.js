@@ -9,7 +9,7 @@ import { useLocation } from "react-router";
 import Route from "@/router";
 import clsx from "clsx";
 import Appbar from '@/components/appbar'
-const drawerWidth = 0;
+const drawerWidth = 200;
 
 const useStyle = makeStyles((theme) => {
   console.log(theme, 'theme')
@@ -18,7 +18,6 @@ const useStyle = makeStyles((theme) => {
     backdrop: {
       display: 'flex',
       minHeight: '100vh',
-      flexDirection: 'column',
     },
     content: {
       flexGrow: 1,
@@ -55,9 +54,7 @@ function App() {
   return (
     <React.Suspense fallback={null}>
       <div className={clsx(classes.backdrop, classes.a)}>
-        {/* 左侧 */}
         <Appbar />
-        {/* 右侧 */}
         <div className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.main}>
