@@ -67,6 +67,7 @@ export default function SimpleTabs() {
             ))}
         </Tabs>
       </AppBar>
+
     </div>
   );
 }

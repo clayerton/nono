@@ -28,7 +28,6 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
 const createEnvironmentHash = require('./webpack/persistentCache/createEnvironmentHash');
-
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 

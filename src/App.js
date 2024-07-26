@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import 'antd/dist/antd.css'; 
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
 import { useGetInfo } from "@/redux/profile";
@@ -8,6 +9,8 @@ import { makeStyles } from "@material-ui/styles";
 import { useLocation } from "react-router";
 import Route from "@/router";
 import clsx from "clsx";
+
+
 import Appbar from '@/components/appbar'
 const drawerWidth = 0;
 
