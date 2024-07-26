@@ -10,10 +10,10 @@ import cx from 'clsx';
 
 
 const routers = [
-    { url: '/', exact: true, name: 'Home', logo: Images.home },
-    { url: '/deploy', name: 'Deploy', logo: Images.explore },
-    { url: '/fameScan', name: 'FAMEScan', logo: Images.stats },
-    { url: '/market', name: 'Market', logo: Images.reward },
+    { url: '/', exact: true, name: '北京大豪', logo: Images.home },
+    { url: '/deploy', name: '刺绣机事业部', logo: Images.explore },
+    { url: '/fameScan', name: '网络部', logo: Images.stats },
+    { url: '/market', name: '前端组', logo: Images.reward },
 
 ]
 
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
         displa: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        background: '#1890ff'
     }
 }));
 
