@@ -19,20 +19,34 @@ const data = [
       description: '$FAME is the inaugural token launched based on the FAME Protocol.',
     },
     {
-        title: '1. What is $FAME?',
-        description: '$FAME is the inaugural token launched based on the FAME Protocol.',
+        title: '2.  What is FAME Protocol?',
+        description: <div>
+          The FAME Protocol is a fair launch protocol built on Solana, designed to offer a transparent and equitable platform 
+          that enables all users to participate in and benefit from the growth and appreciation of meme coins. 
+          All projects deployed through this protocol are guaranteed against rug pulls, 
+          providing users with a fast and cost-effective environment for the creation, trade, and circulation of meme coins.
+        </div>,
       },
       {
-        title: '1. What is $FAME?',
-        description: '$FAME is the inaugural token launched based on the FAME Protocol.',
+        title: '3. Goals and Vision?',
+        description: <div>
+          The FAME Protocol aims to create a vibrant and healthy meme coin ecosystem. By fostering community involvement and transparent governance, 
+          the project seeks to establish a sustainable platform where everyone can find their niche in this exciting emerging market. In the next phase, 
+          the FAME Protocol will introduce Deploy and Marketing functionalities, 
+          allowing anyone to launch tokens through the protocol.
+        </div>,
       },
       {
-        title: '1. What is $FAME?',
-        description: '$FAME is the inaugural token launched based on the FAME Protocol.',
+        title: '4. How does the FAME Protocol ensure fairness, equity, and transparency?',
+        description: <div>
+          <p>- It's an open source contract.</p>
+          <p>- Everyone can initiate refunds or open LP.</p>
+          <p>- The completion of LP formation, discarding of permissions, refunds, and token distribution will be entirely controlled by the contract, 
+            ensuring a transparent and fair process for all participants.</p>
+        </div>,
       },
   ];
-export default function Explore(props) {
-    console.log('Explore')
+export default function Home(props) {
 
     
     const columns = [
@@ -96,13 +110,14 @@ export default function Explore(props) {
                     footer={(currentPageData => {
                         return <a onClick={() => { }}
                             style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                            加载更多
+                            View more
                         </a>
                     })}
 
                 />
             </div>
 
+                    <div>Q&A =================================================================================================================</div>
             <div style={{ width: '100%' }}>
                 <List
                     itemLayout="horizontal"
