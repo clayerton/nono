@@ -1,131 +1,119 @@
 import React from 'react';
-import { Button, Skeleton, Space, List, Table } from 'antd';
+import { Button, Form, Input, Upload, Row, Col, InputNumber, message } from 'antd';
 import './index.less';
 import Images from '@/constant'
+import { PlusOutlined } from '@ant-design/icons';
 
-const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-  ];
 
-  const listData = [
-    {
-      title: '1. What is $FAME?',
-      description: '$FAME is the inaugural token launched based on the FAME Protocol.',
-    },
-    {
-        title: '1. What is $FAME?',
-        description: '$FAME is the inaugural token launched based on the FAME Protocol.',
-      },
-      {
-        title: '1. What is $FAME?',
-        description: '$FAME is the inaugural token launched based on the FAME Protocol.',
-      },
-      {
-        title: '1. What is $FAME?',
-        description: '$FAME is the inaugural token launched based on the FAME Protocol.',
-      },
-  ];
+const { TextArea } = Input
+
 export default function Explore(props) {
-    console.log('Explore')
+  console.log('Explore')
 
-    
-    const columns = [
-        {
-          title: 'Token',
-          dataIndex: 'name',
-          key: 'name',
-          render: (text) => {
-                return <div style={{width: '100%', height: 100, display: 'flex', flexDirection: 'row'}}>
-                    <div>
-                        <img src={Images.logo} alt='' style={{ width: 60, height: 60 }} />
-                    </div>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <div>pizza</div>
-                    <div>pizza2</div>
-                    </div>
+  const onFinish = (values) => {
+    console.log('values', values);
+  }
+
+  return (
+    <div className={'main'}>
+      <div className='title1'>Fair Meme Deploy<div>V2</div></div>
+      <div>The FAME protocol only charges a service fee when the deployed Meme Coin reaches its threshold of raising.
+        The service fee is 0.8% of the raised SOL, with a minimum charge of 3.8 SOL if less,
+        to cover the costs of establishing liquidity pools. (provisionally on a trial basis)</div>
+
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', }}>
+        <Form onFinish={onFinish}>
+          <Row gutter={24}>
+            <Item label="Token name" name={'tokenName'}>
+              <Input placeholder='Like "FAME' />
+            </Item>
+
+            <Item label="Token Logo" valuePropName="fileList">
+              <Upload action="/upload.do" listType="picture-card">
+                <div>
+                  <PlusOutlined />
+                  <div
+                    style={{
+                      marginTop: 8,
+                    }}
+                  >
+                    Upload
+                  </div>
                 </div>
-            },
-        },
-        {
-          title: 'Progress',
-          dataIndex: 'age',
-          key: 'age',
-        },
-        {
-          title: 'Status',
-          dataIndex: 'address',
-          key: 'address',
-        },
-        {
-            title: 'Created',
-            dataIndex: 'address',
-            key: 'address',
-          },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (_, record) => (
-            <div style={{ display: 'flex', flexDirection: 'column'}}>
-              <Button type='primary' onClick={() => {}} style={{marginBottom: 10}}>Swep</Button>
+              </Upload>
+            </Item>
 
-              <Button type='primary' onClick={() => {}}>Detail</Button>
-            </div>
-          ),
-        },
-      ];
-    return (
-        <div className={'main'}>
-            <div className='title1'>FAME Protocol</div>
-            <div>A Fair Launch Protocol for meme coins, base on Solana.</div>
+            <Item label="Description">
+              <TextArea rows={4} />
+            </Item>
+
+            <div>===============================================================</div>
+
+            <Item label={'Blockchain'}>
+              <span>Solana</span>
+            </Item>
+
+            <Item label={'Supply'} extra="LP: 50%, Airdrop: 50%">
+              <span>1,000,000,000</span>
+            </Item>
+
+            <Item label={'Goal of Raising'} extra={<div>
+              <p>The portion raised exceeds this goal will be refunded on a pro-rata basis.</p>
+              <p>If the total SOL raised are less than this goal, it will be considered a fundraising failure,
+                and all SOL will be fully refunded to the wallet addresses of the participants who contributed.</p>
+            </div>} rules={[{ require: true, message: 'must not be empty' }]}>
+              <InputNumber style={{ width: '100%' }} addonAfter={'SOL'} />
+            </Item>
+
+            <Item label={'HardCap'} extra={<div>- Once the fundraising amount reaches the HardCap,
+              users are no longer able to participate in the fundraising.</div>} rules={[{ require: true, message: 'must not be empty' }]}>
+              <InputNumber style={{ width: '100%' }} addonAfter={'SOL'} />
+            </Item>
+
+            <Item label={'Max Amount Per User'} extra={<div>- The maximum amount each wallet address can participate in the fundraising.</div>} rules={[{ require: true, message: 'must not be empty' }]}>
+              <InputNumber style={{ width: '100%' }} addonAfter={'SOL/User'} />
+            </Item>
+
+            <Item label={'Raising Duration'} extra={<div>- The maximum amount each wallet address can participate in the fundraising.</div>} rules={[{ require: true, message: 'must not be empty' }]}>
+              <InputNumber style={{ width: '100%' }} addonAfter={'Hours'} />
+            </Item>
+
+            <div>===============================================================</div>
+
+            <Item label={'Twitter Link'} />
+            <Item label={'Telegram Link'} />
+            <Item label={'Website'} />
+
             <div>
-                <Button type='primary' onClick={() => { }}>Deploy a new coin</Button>
-                <Button onClick={() => { }}>Deploy a new coin</Button>
-            </div>
-            <div>Pool Created</div>
-            <div style={{ width: '100%' }}>
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    pagination={false}
-                    footer={(currentPageData => {
-                        return <a onClick={() => { }}
-                            style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                            加载更多
-                        </a>
-                    })}
-
-                />
+              <Button type='primary' htmlType='submit'>Deploy</Button>
             </div>
 
-            <div style={{ width: '100%' }}>
-                <List
-                    itemLayout="horizontal"
-                    dataSource={listData}
-                    renderItem={item => (
-                        <List.Item>
-                            <List.Item.Meta
-                                title={<a href="https://ant.design">{item.title}</a>}
-                                description={item.description}
-                            />
-                        </List.Item>
-                    )}
-                />
-            </div>
+          </Row>
+        </Form>
 
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <img src={Images.logo} alt='' style={{ width: 60, height: 60, }} />
-                <img src={Images.logo} alt='' style={{ width: 60, height: 60 }} />
-            </div>
-            <footer>
-                <img src={Images.logo} alt='' style={{ width: 60, height: 60 }} />
-            </footer>
-            <footer>© 2024 by FAME. All rights reserved!</footer>
-        </div>
-    )
-} 
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <img src={Images.logo} alt='' style={{ width: 60, height: 60, }} />
+        <img src={Images.logo} alt='' style={{ width: 60, height: 60 }} />
+      </div>
+      <footer>
+        <img src={Images.logo} alt='' style={{ width: 60, height: 60 }} />
+      </footer>
+      <footer>© 2024 by FAME. All rights reserved!</footer>
+    </div>
+  )
+}
+
+const Item = (props) => {
+  const { label, name, children, rules, ...rest } = props;
+  return (
+    <Col lg={24} md={24} sm={24}>
+      <Form.Item {...rest} label={label} name={name} rules={rules} labelCol={{ span: 6 }} wrapperCol={{ span: 16 }}>
+        {children || (
+          <Input autoComplete="off" allowClear placeholder={'(Optional)'} />
+        )}
+      </Form.Item>
+    </Col>
+  );
+};
