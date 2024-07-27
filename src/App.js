@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import 'antd/dist/antd.css'; 
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
 import { useGetInfo } from "@/redux/profile";
@@ -8,6 +9,8 @@ import { makeStyles } from "@material-ui/styles";
 import { useLocation } from "react-router";
 import Route from "@/router";
 import clsx from "clsx";
+
+
 import Appbar from '@/components/appbar'
 const drawerWidth = 0;
 
@@ -19,6 +22,7 @@ const useStyle = makeStyles((theme) => {
       display: 'flex',
       minHeight: '100vh',
       flexDirection: 'column',
+      justifyContent: 'flex-start'
     },
     content: {
       flexGrow: 1,
@@ -26,9 +30,9 @@ const useStyle = makeStyles((theme) => {
         marginLeft: drawerWidth,
       },
     },
-    toolbar: theme.mixins.toolbar,
+    // toolbar: theme.mixins.toolbar,
     main: {
-      padding: '50px',
+      padding: '0px 300px',
       background: '#e5e5e5',
       [theme.breakpoints.between('sm', 'md')]: {
         padding: '20px',
@@ -55,11 +59,10 @@ function App() {
   return (
     <React.Suspense fallback={null}>
       <div className={clsx(classes.backdrop, classes.a)}>
-        {/* 左侧 */}
         <Appbar />
         {/* 右侧 */}
         <div className={classes.content}>
-          <div className={classes.toolbar} />
+          {/* <div className={classes.toolbar} /> */}
           <div className={classes.main}>
             <Route />
           </div>
